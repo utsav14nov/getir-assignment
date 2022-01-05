@@ -1,10 +1,10 @@
-const express = require("express");
-const path = require("path");
+const express = require("express"); // Express Module
 
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index'); // Route Module
 
 const app = express();
 
+// CORS Management
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -16,13 +16,15 @@ app.use((req, res, next) => {
     next();
 });
 
+//MiddleWare to json payload in request body
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
+// Adding Routes
 app.use('/v1', indexRouter);
 
 const port = process.env.PORT || "8000";
 
+// Starting server
 app.listen(port, () => {
   console.log(`Listening to requests on ${port}`);
 });
