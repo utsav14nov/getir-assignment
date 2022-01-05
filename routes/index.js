@@ -6,7 +6,7 @@ var recordsRouter = require('./records');
 router.get('/', function(req, res, next) {
   return res.status(400).json({ 
   	code: 400,
-  	msg: 'Incorrect route' 
+  	msg: 'Incorrect route ( Use /records/fetch)' 
   });
 });
 
