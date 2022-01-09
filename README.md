@@ -14,3 +14,14 @@ npm run start
 
 #Running test suites
 npm run test
+
+# API Route
+
+Method: POST
+Route :  /v1/records/fetch
+Payload: {
+    "startDate": "2018-01-01",  // YYYY-MM-DD
+    "endDate": "2018-02-01",    // YYYY-MM-DD
+    "minCount": 300,            // Integer type
+    "maxCount": 400             // Integer type
+}
