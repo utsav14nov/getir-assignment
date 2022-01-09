@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const database_url = require('./configs/config').database_url;
+const {database_url, database_name} = require('./configs/config');
 
 /*
 Function   : DbConnection 
@@ -21,10 +21,10 @@ var DbConnection = function () {
   async function DbConnect() {
     try {
       let url = database_url;
-      let _db = await MongoClient.connect(url);
-      return _db
+      let _client = await MongoClient.connect(url);
+      return _client.db(database_name)
     } catch (e) {
-      return e;
+      throw e;
     }
   }
 
@@ -51,7 +51,22 @@ var DbConnection = function () {
     }
   }
 
-  return {Get}
+  /*
+  Function   : Close 
+  Description: Close database connection 
+  Parameters : N/A
+  Return     : NULL
+  */
+
+  async function Close() {
+    try {
+      db.close()
+    } catch (e) {
+      return e;
+    }
+  }
+
+  return {Get,Close}
 }
 
 module.exports = DbConnection();
