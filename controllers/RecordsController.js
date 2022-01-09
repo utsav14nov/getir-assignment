@@ -18,6 +18,6 @@ exports.fetch = async function(req, res, next) {
 		const records = await recordsService.fetchRecords(payload)
 		return res.status(200).json({...SUCCESS_FETCH_RECORDS,records});
 	}catch(e){
-		return res.status(500).json({FAILURE_FETCH_RECORDS,...{msg:e}});
+		return res.status(500).json({...FAILURE_FETCH_RECORDS,msg:e.message});
 	}
 }

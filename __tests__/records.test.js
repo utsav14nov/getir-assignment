@@ -121,4 +121,19 @@ describe("Route /v1/records/fetch ", () => {
 
     expect(response.statusCode).toBe(200);
   });
+
+  test("Post /v1/records/fetch Error response When Database not connected return SUCCESS_FETCH_RECORDS With non empty records field", async () => {   // Correct Payload
+  	
+  	DbConnection.Get = jest.fn()
+  	DbConnection.Get.mockReturnValueOnce(null);
+
+    const response = await request(app)
+    	.post("/v1/records/fetch")
+    	.send(testCases.CORRECT_PAYLOAD);
+
+    	expect(response.body).toHaveProperty("code");
+    	expect(response.body.code).toBe(-1);
+
+    	expect(response.statusCode).toBe(500);
+  });
 });
